@@ -1,6 +1,7 @@
 import os
 import h5py
 import numpy as np
+import pdb
 
 import torch
 import torch.utils.data as data
@@ -228,6 +229,8 @@ class H5Loader(BaseDataLoader):
             inp_voxel = self.create_voxel_encoding(xs, ys, ts, ps)
             inp_list = self.create_list_encoding(xs, ys, ts, ps)
             inp_pol_mask = self.create_polarity_mask(ps)
+
+            # pdb.set_trace()
 
             # hot pixel removal
             if self.config["hot_filter"]["enabled"]:

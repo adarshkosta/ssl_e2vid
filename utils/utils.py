@@ -23,6 +23,8 @@ def load_model(model_dir, model, device):
     elif os.path.isdir(model_dir):
         model_name = model_dir + model.__class__.__name__
 
+        
+
         extensions = [".pt", ".pth.tar", ".pwf", "_weights_min.pwf"]  # backwards compatibility
         for ext in extensions:
             if os.path.isfile(model_name + ext):
@@ -30,7 +32,9 @@ def load_model(model_dir, model, device):
                 break
 
         if os.path.isfile(model_name):
+            # print(model_name, model, device)
             model_loaded = torch.load(model_name, map_location=device)
+            print(model_loaded.keys())
             if "state_dict" in model_loaded.keys():
                 model_loaded = model_loaded["state_dict"]
             model.load_state_dict(model_loaded)

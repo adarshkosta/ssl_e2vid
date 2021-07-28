@@ -3,6 +3,7 @@ from abc import abstractmethod
 import numpy as np
 import random
 import torch
+import pdb
 
 from .encodings import events_to_voxel, events_to_channels, events_to_mask, get_hot_event_mask
 
@@ -206,6 +207,7 @@ class BaseDataLoader(torch.utils.data.Dataset):
         """
 
         inp_pol_mask = torch.stack([ps, ps])
+        
         inp_pol_mask[0, :][inp_pol_mask[0, :] < 0] = 0
         inp_pol_mask[1, :][inp_pol_mask[1, :] > 0] = 0
         inp_pol_mask[1, :] *= -1

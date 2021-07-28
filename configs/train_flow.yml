@@ -7,7 +7,7 @@ data:
     num_bins: 5
 
 model_flow:
-    name: EVFlowNet # FireFlowNet/EVFlowNet
+    name: FireFlowNet # FireFlowNet/EVFlowNet
     base_num_channels: 32
     kernel_size: 3
     mask_output: False

@@ -1,4 +1,5 @@
 import argparse
+import pdb
 
 import numpy as np
 import torch
@@ -14,8 +15,12 @@ from utils.visualization import Visualization
 
 def test(args, config_parser):
     config = config_parser.merge_configs(args.trained_model)
+    # config = config_parser.config
+    # config["trained_model"] = args.trained_model
+
     config["loader"]["batch_size"] = 1
     config["vis"]["bars"] = True
+    
 
     # store validation settings
     eval_id = config_parser.log_eval_config(config)
@@ -52,6 +57,8 @@ def test(args, config_parser):
         while True:
             for inputs in dataloader:
 
+                pdb.set_trace()
+
                 # finish inference loop
                 if data.seq_num >= len(data.files):
                     end_test = True
@@ -59,6 +66,8 @@ def test(args, config_parser):
 
                 # forward pass
                 x = model(inputs["inp_voxel"].to(device), inputs["inp_cnt"].to(device))
+
+                pdb.set_trace()
 
                 # image of warped events
                 iwe = compute_pol_iwe(
@@ -96,6 +105,8 @@ if __name__ == "__main__":
         help="config file, overwrites model settings",
     )
     args = parser.parse_args()
+
+    # print(args)
 
     # launch testing
     test(args, YAMLParser(args.config))
